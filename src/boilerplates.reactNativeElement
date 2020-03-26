@@ -1,0 +1,10 @@
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+
+const Screen = () => {
+  return <Text style={{ fontSize: 48 }}>Screen</Text>;
+};
+
+const styled = StyleSheet.create({});
+
+export default Screen;
