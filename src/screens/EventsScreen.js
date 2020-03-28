@@ -23,7 +23,13 @@ const EventsScreen = mobxConnect(({ authStore, eventsStore }) => ({
           Events
         </Text>
         <View style={{ margin: 10 }}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              console.log(navigation);
+              navigation.navigate("EventCreate");
+              console.log("click");
+            }}
+          >
             <Icon size={40} name="add-circle" color="red" type="material" />
           </TouchableOpacity>
         </View>

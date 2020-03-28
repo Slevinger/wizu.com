@@ -8,6 +8,7 @@ import SignupScreen from "./src/screens/SignupScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 import NotificationsScreen from "./src/screens/NotificationsScreen";
 import ShareEventScreen from "./src/screens/ShareEventScreen";
+import CreateEventWizard from "./src/components/Events/EventWizard/CreateEventWizard";
 import MainProfileScreen, { ProfileScreen } from "./src/screens/ProfileScreen";
 import { Icon } from "react-native-elements";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
@@ -18,6 +19,7 @@ import ErrorHandler from "./src/components/ErrorHandler";
 import { Provider as StoresProvider } from "./src/mobx/Provider";
 import { createStores } from "./src/mobx/createStores";
 import ImageViewer from "./src/components/ImageViewer";
+
 const eventsFlow = createStackNavigator(
   {
     EventsList: EventsScreen,
@@ -29,8 +31,8 @@ const eventsFlow = createStackNavigator(
       {
         headerMode: "none"
       }
-    )
-    // EventCreate:EventsScreen
+    ),
+    EventCreate: CreateEventWizard
   },
   {
     headerMode: "none"
