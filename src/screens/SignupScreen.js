@@ -9,7 +9,7 @@ import {
 import { Input, Text } from "react-native-elements";
 import { Container } from "../styledComponents";
 
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/Forms/AuthForm";
 import NavLink from "../components/NavLink";
 import Spacer from "../components/Spacer";
 import { NavigationEvents } from "react-navigation";

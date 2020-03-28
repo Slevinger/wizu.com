@@ -3,20 +3,10 @@ import { Text, Button, Input } from "react-native-elements";
 import { View, StyleSheet } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import { MaterialIcons } from "@expo/vector-icons";
-import { ErrorText } from "../components/StyledComponents";
-import Spacer from "./Spacer";
+import Spacer from "../Spacer";
 import { TouchableOpacity, ScrollView } from "react-native-gesture-handler";
-
-import { useForm, Controller } from "react-hook-form";
-
-const FieldController = ({ errors, name, label, ...props }) => {
-  return (
-    <>
-      <Controller label={label} name={name} {...props} />
-      {errors[name] && <ErrorText>{`${label} is required.`}</ErrorText>}
-    </>
-  );
-};
+import { FieldController } from "./FieldController";
+import { useForm } from "react-hook-form";
 
 const AuthForm = ({ submitLabel, onSubmit, onBlur, mode = "signup" }) => {
   const [hidePassword, setHidePassword] = useState(true);

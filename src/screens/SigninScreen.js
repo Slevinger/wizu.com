@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { Container } from "../styledComponents";
-import AuthForm from "../components/AuthForm";
+import AuthForm from "../components/Forms/AuthForm";
 import NavLink from "../components/NavLink";
 import { NavigationEvents } from "react-navigation";
 import { mobxConnect } from "../mobx/mobxConnect";
