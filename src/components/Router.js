@@ -44,7 +44,10 @@ export default class Router extends Component {
     };
 
     return createAppContainer(
-      createStackNavigator(navigationRoutes, { navigationOptions })
+      createStackNavigator(navigationRoutes, {
+        navigationOptions,
+        headerMode: "none"
+      })
     );
   };
 
