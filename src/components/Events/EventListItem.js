@@ -28,12 +28,14 @@ import ListImage from "../ListImage";
 // 	timestamp: new Date().getTime()
 // }
 
-export const Event = mobxConnect(({ authStore, eventsStore }) => ({
-  username: authStore.user.username,
-  updateImage: eventsStore.updateImage,
-  setCurrentEvent: eventsStore.setCurrentEvent,
-  setEventSeen: eventsStore.setEventSeen
-}))(props => {
+export const Event = mobxConnect(
+  ({ authStore, eventsStore, currentEventStore }) => ({
+    username: authStore.user.username,
+    updateImage: currentEventStore.updateImage,
+    setEventSeen: currentEventStore.setEventSeen,
+    setCurrentEvent: eventsStore.setCurrentEvent
+  })
+)(props => {
   const {
     name,
     date,
@@ -48,7 +50,7 @@ export const Event = mobxConnect(({ authStore, eventsStore }) => ({
 
   const { navigate } = navigation;
   // const { openImagePickerAsync } = useImagePicker(updateImage);
-  console.log(image_url);
+  // console.log(image_url);
   return (
     <StyledEventItem key={event_id}>
       <ListImage image_url={image_url} />

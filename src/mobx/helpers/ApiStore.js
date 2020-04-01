@@ -21,7 +21,7 @@ export class ApiStore extends AutoBinder {
       const answer = await (method === "get"
         ? axios(api)
         : axios[method](url, body, { headers }));
-      console.log(answer);
+
       const { data, error } = answer.data;
       if (error) {
         console.log(error);
@@ -34,7 +34,6 @@ export class ApiStore extends AutoBinder {
       }
     } catch (e) {
       if (!e.response) {
-        console.log("json", e.toJSON());
         throw new Error(e.data);
       }
       // const { errorMessage, showErrorModal = true } = api;

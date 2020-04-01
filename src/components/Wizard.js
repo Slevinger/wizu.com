@@ -34,7 +34,6 @@ const styles = {
 export default class Wizard extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.steps[0] instanceof Function);
   }
   static propTypes = {
     handleSubmitWizard: PropTypes.func.isRequired,
@@ -81,7 +80,7 @@ export default class Wizard extends Component {
   };
 
   onHandleNavRef = navigator => {
-    console.log("nav", navigator);
+    // console.log("nav", navigator);
     this.navigator = navigator;
   };
 
@@ -97,18 +96,18 @@ export default class Wizard extends Component {
     const currentStep = this.currentStep();
 
     return (
-      <SafeAreaView style={styles.safeAreaView}>
-        <Text style={{ padding: 10 }}>
+      <View style={styles.safeAreaView}>
+        <Text>
           Step {currentStepIndex + 1} of {steps.length}
         </Text>
-        <ProgressBar percentage={(currentStepIndex + 1) / steps.length} />
+        {/* <ProgressBar percentage={(currentStepIndex + 1) / steps.length} /> */}
         <TouchableHighlight
           onPress={this.handleOnPressButton}
           style={styles.touchableHighlight}
         >
           <Text>{this.onLastStep() ? "SUBMIT" : "NEXT"}</Text>
         </TouchableHighlight>
-      </SafeAreaView>
+      </View>
     );
   };
 

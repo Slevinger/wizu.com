@@ -8,6 +8,7 @@ import { mobxConnect } from "../../mobx/mobxConnect";
 import { distanceFromTodayText } from "../../utils/timeDescriptor";
 import moment from "moment";
 import capitalize from "lodash/capitalize";
+import * as Colors from "../../const/Colors";
 
 const EventInvite = ({ otherUser, event, setCurrentEvent }) => {
   const { name, _id, date, image_url } = event;
@@ -33,7 +34,7 @@ const EventInvite = ({ otherUser, event, setCurrentEvent }) => {
           onPress={async () => await setCurrentEvent(_id)}
           text={name}
         />
-        <Text style={{ color: "lightgrey" }}>
+        <Text style={{ color: Colors.Text }}>
           {capitalize(distanceFromTodayText(moment(date)))}
         </Text>
       </View>

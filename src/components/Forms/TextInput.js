@@ -4,16 +4,29 @@ import { TouchableOpacity } from "react-native";
 
 const TextInput = React.forwardRef(
   (
-    { label, onValueChanged, value: initialValue, editable = true, ...props },
+    {
+      label,
+      onChange: onValueChanged,
+      value,
+      setValue,
+      editable = true,
+      readOnly = true,
+      setReadOnly,
+      onBlur,
+      onFocus,
+      ...props
+    },
     ref
   ) => {
-    const [readOnly, setReadOnly] = useState(true);
-    const [value, setValue] = useState(initialValue);
+    if (!setReadOnly) {
+      [readOnly, setReadOnly] = useState(readOnly);
+    }
+
+    // const [value, setValue] = useState(initialValue);
 
     const onChange = useCallback(
       val => {
-        setValue(val);
-        onValueChanged && onValueChanged(val);
+        onValueChanged(val);
       },
       [onValueChanged]
     );
@@ -25,8 +38,25 @@ const TextInput = React.forwardRef(
         editable={editable}
         inputStyle={readOnly ? { backgroundColor: "lightgrey" } : {}}
         labelStyle={readOnly ? { color: "lightgrey" } : {}}
-        onBlur={() => setReadOnly(true)}
-        onFocus={() => setReadOnly(false)}
+        // onBlur={e => {
+        //   console.log("blur1");
+        //   setReadOnly(true);
+        //   onBlur && onBlur(e);
+        // }}
+        onFocus={() => {
+          onFocus && onFocus(value);
+          setReadOnly(false);
+        }}
+        onEndEditing={args => {
+          console.log("done editing name", args.nativeEvent.text);
+          onValueChanged(args.nativeEvent.text);
+          setReadOnly(true);
+          onBlur && onBlur();
+        }}
+        onBlur={() => {
+          // setReadOnly(true);
+          onBlur && onBlur();
+        }}
         autoCorrect={false}
         value={value}
         onChangeText={onChange}

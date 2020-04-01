@@ -65,7 +65,7 @@ export default class Router extends Component {
 
   render() {
     const { Navigator } = this.state;
-    console.log("Navigator", Navigator);
+
     if (!Navigator) {
       return null;
     }

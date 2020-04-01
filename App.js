@@ -19,7 +19,9 @@ import ErrorHandler from "./src/components/ErrorHandler";
 import { Provider as StoresProvider } from "./src/mobx/Provider";
 import { createStores } from "./src/mobx/createStores";
 import ImageViewer from "./src/components/ImageViewer";
-
+import glyphMap from "./node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/glyphmaps/Foundation.json";
+console.log(Object.keys(glyphMap).filter(key => key.match(/tree/g)));
+// console.log(icons)
 const eventsFlow = createStackNavigator(
   {
     EventsList: EventsScreen,
@@ -70,7 +72,7 @@ const App = createAppContainer(switchNavigator, { style: { padding: 0 } });
 
 export default props => {
   const [stores, setStores] = useState(createStores(props));
-
+  console.log("new run");
   return (
     <SafeAreaProvider>
       <StoresProvider {...stores}>

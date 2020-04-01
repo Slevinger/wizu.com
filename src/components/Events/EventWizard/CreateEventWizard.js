@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { View } from "react-native";
-
+import Step2 from "./Step2";
+import Step1 from "./Step1";
 const Step = () => {
   return <View />;
 };
@@ -13,8 +14,8 @@ export default () => {
   }, []);
 
   const steps = [
-    { component: Step, routeName: "Step1" },
-    { component: Step, routeName: "Step2" },
+    { component: Step1, routeName: "Step1" },
+    { component: Step2, routeName: "Step2" },
     { component: Step, routeName: "Step3" }
   ];
 

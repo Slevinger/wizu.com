@@ -29,7 +29,6 @@ const NotificationsScreenComponent = ({ user, navigation }) => {
         renderItem={({ item }) => {
           return <Noatification user={user} {...item} />;
         }}
-        keyExtractor={item => item._id}
       />
     </>
   );

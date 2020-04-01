@@ -12,19 +12,20 @@ export class EventsStore extends AutoBinder {
 
   authStore;
 
-  events;
+  currentEventStore;
 
-  currentEvent;
+  events;
 
   statsStore;
 
   reachedOut;
 
-  constructor(apiStore, authStore, statsStore) {
+  constructor(apiStore, authStore, statsStore, currentEventStore) {
     super();
     this.apiStore = apiStore;
     this.authStore = authStore;
     this.statsStore = statsStore;
+    this.currentEventStore = currentEventStore;
     this.reset();
   }
 
@@ -38,49 +39,10 @@ export class EventsStore extends AutoBinder {
     const api = getEventsApi();
     this.reachedOut = true;
     const data = await this.apiStore.callApi(api);
+    console.log("events", data);
     this.events = data;
     if (this.currentEvent) {
       this.setCurrentEvent(this.currentEvent._id);
-    }
-  }
-
-  async setEventSeen() {
-    try {
-      if (this.currentEvent && this.currentEvent.answer === "not seen yet") {
-        await this.setSeen();
-      }
-    } catch (err) {
-      this.statsStore.addError(err);
-    }
-  }
-
-  async setInterested() {
-    try {
-      const api = replayApi(this.currentEvent._id, "interested");
-      await this.apiStore.callApi(api);
-      await this.getEvents();
-    } catch (err) {
-      this.statsStore.addError(err);
-    }
-  }
-
-  async setSeen() {
-    try {
-      const api = replayApi(this.currentEvent._id, "seen");
-      await this.apiStore.callApi(api);
-      await this.getEvents();
-    } catch (err) {
-      this.statsStore.addError(err);
-    }
-  }
-
-  async approveInvite() {
-    try {
-      const api = replayApi(this.currentEvent._id, "confirm");
-      await this.apiStore.callApi(api);
-      await this.getEvents();
-    } catch (err) {
-      this.statsStore.addError(err);
     }
   }
 
@@ -96,42 +58,10 @@ export class EventsStore extends AutoBinder {
       []
     );
 
-    this.currentEvent = event_id
+    const event = event_id
       ? flatEvents.find(({ _id }) => _id === event_id)
       : null;
-  }
-
-  setLocation(location) {
-    this.currentEvent.location = location;
-  }
-
-  async updateImage(event_id, data) {
-    try {
-      const { username } = this.authStore;
-      this.currentEvent.image_url = "http:\\www";
-
-      const api = updateImageApi({ event_id, username, data });
-      const answer = await this.apiStore.callApi(api);
-      if (this.currentEvent) {
-        this.currentEvent.image_url = answer;
-      }
-      await this.getEvents();
-      return answer;
-      // this.events.find(({ _id }) => _id === event_id).image_url = answer;
-
-      // const credentials = await Keychain.getGenericPassword();
-    } catch (err) {
-      console.log("error", err);
-    }
-  }
-
-  async commitEventChanges() {
-    if (this.currentEvent) {
-      const api = updateEventApi(this.authStore.token, this.currentEvent);
-      const answer = await this.apiStore.callApi(api);
-      await this.getEvents();
-      return answer;
-    }
+    this.currentEventStore.setCurrentEvent(event);
   }
 }
 

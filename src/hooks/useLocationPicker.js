@@ -4,6 +4,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import * as Colors from "../const/Colors";
 
 const API_KEY = "ckxM3TkGxZ9yiVZ84Pn-zkW2uf5Ftbahp2SaMS7Ihx0";
 const GEOCODE_URL =
@@ -35,7 +36,7 @@ const StyledMaterialIcon = styled(MaterialIcons)`
 `;
 
 const StyledAddress = styled(View)`
-  height: 50;
+  height: 50px;
   margin: 3px;
   background-color: white;
   border-bottom-width: 1px;

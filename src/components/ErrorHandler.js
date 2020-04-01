@@ -14,7 +14,10 @@ const ErrorDialog = mobxConnect(({ statsStore }) => {
     errors.length > 0 && (
       <View style={styles.dialog}>
         {errors.map((message, index) => (
-          <TouchableOpacity key={index} onPress={() => clearError(index)}>
+          <TouchableOpacity
+            key={message + index}
+            onPress={() => clearError(index)}
+          >
             <Text style={styles.errorMessages}>{message}</Text>
           </TouchableOpacity>
         ))}

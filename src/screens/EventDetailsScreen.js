@@ -13,32 +13,20 @@ import EmptyImage from "../../assets/empty-image.png";
 const EventDetailsScreen = ({
   currentEvent,
   updateImage,
-  setLocation,
   setMediaSource,
+  reset,
   navigation
 }) => {
   if (!currentEvent) {
     navigation.navigate("eventsFlow");
   }
-  const { _id, image_url, location } = currentEvent;
+  const { _id, image_url } = currentEvent;
   const { openImagePickerAsync, imageUrl } = useImagePicker(
     updateImage,
     _id,
     image_url
   );
-  const source = image_url
-    ? { uri: image_url.replace("?alt=media") + "alt-media" }
-    : EmptyImage;
-
-  const { locationSearchBar, addressDropdownList } = useLocationPicker({
-    onFocus(e) {
-      console.log(e);
-    },
-    onValueSet(res) {
-      setLocation(res.address);
-    },
-    currentLocation: location
-  });
+  useEffect(() => reset(), []);
   return (
     <>
       <ScrollView
@@ -70,14 +58,10 @@ const EventDetailsScreen = ({
 };
 
 export default mobxConnect(
-  ({ eventsStore, mediaStore: { setMediaSource } }) => {
-    return {
-      currentEvent: eventsStore.currentEvent,
-      setLocation: eventsStore.setLocation,
-      setCurrentEvent: eventsStore.setCurrentEvent,
-      updateImage: eventsStore.updateImage,
-      commitEventChanges: eventsStore.commitEventChanges,
-      setMediaSource
-    };
+  ({
+    currentEventStore: { currentEvent, reset, updateImage },
+    mediaStore: { setMediaSource }
+  }) => {
+    return { currentEvent, reset, updateImage, setMediaSource };
   }
 )(EventDetailsScreen);

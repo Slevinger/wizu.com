@@ -78,7 +78,7 @@ const EventActionBar = ({
 
 export default mobxConnect(
   ({
-    eventsStore: { currentEvent, setSeen, setInterested, approveInvite }
+    currentEventStore: { currentEvent, setSeen, setInterested, approveInvite }
   }) => {
     return { event: currentEvent, setSeen, setInterested, approveInvite };
   }

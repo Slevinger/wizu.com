@@ -28,7 +28,6 @@ const AuthForm = ({ submitLabel, onSubmit, onBlur, mode = "signup" }) => {
             keyboardType={"number-pad"}
             name="phone"
             label={"Phone Number"}
-            onChange={args => args[0].nativeEvent.text}
             rules={{ required: true }}
             defaultValue=""
             autoCorrect={false}
@@ -41,7 +40,6 @@ const AuthForm = ({ submitLabel, onSubmit, onBlur, mode = "signup" }) => {
             control={control}
             name="email"
             label={"Email"}
-            onChange={args => args[0].nativeEvent.text}
             rules={{ required: true }}
             defaultValue=""
             autoCorrect={false}
@@ -57,7 +55,6 @@ const AuthForm = ({ submitLabel, onSubmit, onBlur, mode = "signup" }) => {
         control={control}
         name="username"
         label={"Username"}
-        onChange={args => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue=""
         autoCorrect={false}
@@ -72,7 +69,6 @@ const AuthForm = ({ submitLabel, onSubmit, onBlur, mode = "signup" }) => {
         control={control}
         errors={errors}
         name="password"
-        onChange={args => args[0].nativeEvent.text}
         rules={{ required: true }}
         defaultValue={""}
         autoCorrect={false}
